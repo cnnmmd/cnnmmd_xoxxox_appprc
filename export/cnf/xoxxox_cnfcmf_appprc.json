@@ -1,0 +1,6 @@
+{
+  "defprc_nod": "-",
+  "defprc_cnf": "-",
+  "lstprc_nod": ["xoxxox_appprc"],
+  "lstprc_cnf": ["xoxxox/config_appprc_nop001", "xoxxox/config_appprc_rsc001", "xoxxox/config_appprc_shl001", "xoxxox/config_appprc_hsk001", "xoxxox/config_appprc_plg001", "xoxxox/config_appprc_rby001", "xoxxox/config_appprc_sch001", "xoxxox/config_appprc_tys001", "xoxxox/config_appprc_pyt001"]
+}
