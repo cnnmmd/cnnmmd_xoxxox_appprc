@@ -1,0 +1,29 @@
+networks:
+  default:
+    name: xoxxox_netmid
+    external: true
+services:
+  xoxxox_appcmf:
+    image: xoxxox/envprc:001
+    container_name: xoxxox_appprc
+    read_only: true
+    tmpfs:
+      - /tmp
+    env_file:
+      - ./envdir.txt
+    volumes:
+      - ../../../export:/opt/common:ro
+    command: bash -c "/env/python/bin/python /opt/common/bin/xoxxox/srvprc.py"
+
+# ホストＯＳ上で：
+# 
+# GWY=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' xoxxox_appmid)
+# SBX=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' xoxxox_appprc)
+# 追加：ネットワーク・フィルタ
+# iptables -I DOCKER-USER 1 -s "${GWY}" -d "${SBX}" -m conntrack --ctstate NEW -j ACCEPT
+# iptables -I DOCKER-USER 2 -s "${SBX}" -d "${GWY}" -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+# iptables -I DOCKER-USER 3 -s "${SBX}" -m conntrack --ctstate NEW -j DROP
+# 削除：ネットワーク・フィルタ
+# iptables -D DOCKER-USER   -s "${GWY}" -d "${SBX}" -m conntrack --ctstate NEW -j ACCEPT
+# iptables -D DOCKER-USER   -s "${SBX}" -d "${GWY}" -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+# iptables -D DOCKER-USER   -s "${SBX}" -m conntrack --ctstate NEW -j DROP
