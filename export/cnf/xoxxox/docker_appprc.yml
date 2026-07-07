@@ -3,7 +3,7 @@ networks:
     name: xoxxox_netmid
     external: true
 services:
-  xoxxox_appcmf:
+  xoxxox_appprc:
     image: xoxxox/envprc:001
     container_name: xoxxox_appprc
     read_only: true
@@ -13,6 +13,8 @@ services:
       - ./envdir.txt
     volumes:
       - ../../../export:/opt/common:ro
+      - ../../../vol000:/opt/vol000:ro
+      - ../../../vol001:/opt/vol001
     command: bash -c "/env/python/bin/python /opt/common/bin/xoxxox/srvprc.py"
 
 # ホストＯＳ上で：
